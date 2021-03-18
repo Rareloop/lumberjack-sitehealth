@@ -56,6 +56,7 @@ class MyCustomCheck extends HealthCheck
             'description' => 'The callback to this test worked',
             'badge' => [
                 'label' => 'Performance',
+                'color' = 'blue',
             ],
             'status' => 'good', // 'good'|'recommended'|'critical'
             'test' => $this->testId(),
