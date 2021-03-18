@@ -54,7 +54,7 @@ abstract class HealthCheck
             add_filter('site_status_tests', function ($tests) {
                 $tests[static::ASYNC][$this->identifier()] = array(
                     'label' => $this->label(),
-                    'test' => rest_url($this->getRestNameSpace() . '/' . $this->getRestRoute()),
+                    'test' => $this->testId(),
                     'has_rest' => true,
                     'async_direct_test' => [$this, 'execute'],
                 );
@@ -64,8 +64,8 @@ abstract class HealthCheck
 
             add_action('rest_api_init', function () {
                 register_rest_route(
-                    $this->getRestNameSpace(),
-                    $this->getRestRoute(),
+                    $this->restNameSpace(),
+                    $this->restRoute(),
                     [
                         [
                             'methods'             => 'GET',
@@ -92,12 +92,17 @@ abstract class HealthCheck
         }
     }
 
-    protected function getRestNameSpace()
+    protected function testId()
+    {
+        return rest_url($this->restNameSpace() . '/' . $this->restRoute());
+    }
+
+    protected function restNameSpace()
     {
         return 'rareloop/lumberjack/v1';
     }
 
-    protected function getRestRoute()
+    protected function restRoute()
     {
         return 'site-health/' . Stringy::create($this->identifier())->slugify();
     }

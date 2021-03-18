@@ -58,7 +58,7 @@ class MyCustomCheck extends HealthCheck
                 'label' => 'Performance',
             ],
             'status' => 'good', // 'good'|'recommended'|'critical'
-            'test' => 'my-custom-check',
+            'test' => $this->testId(),
         ];
     }
 }
