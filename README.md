@@ -59,7 +59,7 @@ class MyCustomCheck extends HealthCheck
                 'color' = 'blue',
             ],
             'status' => 'good', // 'good'|'recommended'|'critical'
-            'test' => $this->testId(),
+            'test' => $this->identifier(),
         ];
     }
 }
